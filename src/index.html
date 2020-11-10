@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Gallery App</title>
+
+</head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/material-icons-font@2.0.0/material-icons-font.css" />
+
+<body>
+  <div class="search">
+    <h1>Images Input Search</h1>
+    <form class="search-form" id="search-form">
+      <input type="search" class="search-input" name="query" autocomplete="off" placeholder="Search images..."
+        required />
+      <div class="search-icon"></div>
+    </form>
+    <ul class="gallery" id="galleryCont">
+      <!-- Список <li> с карточками изображений -->
+    </ul>
+    <button type="button" class="load-more" data-action="load-more">load-more</button>
+  </div>
+  <div class="lds-heart">
+    <div></div>
+  </div>
+
+</body>
+
+</html>
