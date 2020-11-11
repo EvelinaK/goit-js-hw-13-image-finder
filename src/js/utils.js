@@ -1,7 +1,11 @@
 import InfiniteScroll from 'infinite-scroll';
 import cardTemplate from '../templates/card.hbs';
 import service from '../services/gallery-Service';
+import { error, success } from '@pnotify/core';
+import '@pnotify/core/dist/PNotify.css';
+import '@pnotify/core/dist/BrightTheme.css';
 import * as basicLightbox from 'basiclightbox';
+
 // import { clearCountries } from './gallery';
 import ImagesApiService from '../services/gallery-Service';
 const apiService = new ImagesApiService();
@@ -46,7 +50,6 @@ function openModalImg({ target }) {
 }
 
 const toggleLoader = () => {
-  console.log('лоадер');
   refs.$ldsHeart.classList.toggle('loaded');
 };
 
@@ -70,6 +73,25 @@ var proxyElem = document.createElement('div');
 infScroll.on('load', function (response) {
   var { hits } = JSON.parse(response);
   console.log(hits);
+
+  if (hits.length === 0) {
+    error({
+      title: 'Bad search request!',
+      delay: 3000,
+      mouseReset: true,
+      closerHover: false,
+    });
+    toggleLoader();
+    return;
+  }
+  if (hits.length > 1) {
+    success({
+      title: 'success request!',
+      delay: 1000,
+      mouseReset: true,
+      destroy: true,
+    });
+  }
   apiService.incrementPage();
   var itemsHTML = cardTemplate(hits);
 
