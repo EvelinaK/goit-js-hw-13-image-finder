@@ -69,8 +69,12 @@ const infScroll = new InfiniteScroll('#galleryCont', {
 var proxyElem = document.createElement('div');
 infScroll.on('load', function (response) {
   var { hits } = JSON.parse(response);
+  console.log(hits);
+  apiService.incrementPage();
   var itemsHTML = cardTemplate(hits);
+
   proxyElem.innerHTML = itemsHTML;
+
   var items = proxyElem.querySelectorAll('li.cards');
   infScroll.appendItems(items);
 });

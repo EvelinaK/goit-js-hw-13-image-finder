@@ -48,8 +48,8 @@ export default class ImagesApiService {
   }
 
   getQueryPath() {
-    return `${CORS}${BASE_URL}?image_type=photo&orientation=horizontal&q=${this.searchQuery}&page=${this.pageIndex}&per_page=12&key=${API_KEY}`;
-    // return `${CORS}${BASE_URL}?key=${API_KEY}&image_type=photo&orientation=horizontal&q=${query}&page=${this.page}&per_page=12`;
+    return `${CORS}${BASE_URL}?image_type=photo&orientation=horizontal&q=${this.searchQuery}&page=${this.page}&per_page=12&key=${API_KEY}`;
+    // return `${CORS}${BASE_URL}?key=${API_KEY}&image_type=photo&orientation=horizontal&q=${query}&page=${this.pageIndex}&per_page=12`;
   }
 
   get SearchQuery() {
