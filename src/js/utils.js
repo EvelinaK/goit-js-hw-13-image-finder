@@ -1,32 +1,27 @@
 import InfiniteScroll from 'infinite-scroll';
 import cardTemplate from '../templates/card.hbs';
-import service from '../services/gallery-Service';
 import { error, success } from '@pnotify/core';
 import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
 import * as basicLightbox from 'basiclightbox';
-
-// import { clearCountries } from './gallery';
+import { refs } from './refs.js';
+import { clearCountries } from './gallery';
+import { toggleLoader } from './gallery';
+import { openModalImg } from './modal';
 import ImagesApiService from '../services/gallery-Service';
+
 const apiService = new ImagesApiService();
-const refs = {
-  $searchForm: document.querySelector('#search-form'),
-  $galleryCont: document.querySelector('#galleryCont'),
-  $loadMorebutton: document.querySelector('button[data-action="load-more"]'),
-  $galleryList: document.querySelector('.gallery'),
-  $ldsHeart: document.querySelector('.lds-heart'),
-};
+
 ////////-----------------обработчики события --------------------------------------/////////
 refs.$searchForm.addEventListener('submit', searchformSubmitHandler);
 // refs.$loadMorebutton.addEventListener('click', loadMorebuttonHandler);
 refs.$galleryList.addEventListener('click', openModalImg);
-
+////////-----------------поиск картинок в форме--------------------------------------/////////
 function searchformSubmitHandler(e) {
   e.preventDefault();
   if (this.query.value === apiService.SearchQuery) {
     return;
   }
-
   const form = e.currentTarget;
   const input = form.elements.query;
   clearCountries();
@@ -37,26 +32,7 @@ function searchformSubmitHandler(e) {
   toggleLoader();
   infScroll.loadNextPage();
 }
-function openModalImg({ target }) {
-  if (target.nodeName !== 'IMG') {
-    return;
-  }
-  const largeImgURL = target.dataset.source;
-
-  const instance = basicLightbox.create(`
-    <img src="${largeImgURL}" width="800" height="600">
-  `);
-  instance.show();
-}
-
-const toggleLoader = () => {
-  refs.$ldsHeart.classList.toggle('loaded');
-};
-
-const clearCountries = () => {
-  refs.$galleryCont.innerHTML = '';
-};
-
+////////-----------------бесконечный скролл--------------------------------------/////////
 const infScroll = new InfiniteScroll('#galleryCont', {
   path() {
     return apiService.getQueryPath();
@@ -69,9 +45,9 @@ const infScroll = new InfiniteScroll('#galleryCont', {
   history: false,
 });
 
-var proxyElem = document.createElement('div');
+let proxyElem = document.createElement('div');
 infScroll.on('load', function (response) {
-  var { hits } = JSON.parse(response);
+  let { hits } = JSON.parse(response);
   console.log(hits);
 
   if (hits.length === 0) {
@@ -93,11 +69,11 @@ infScroll.on('load', function (response) {
     });
   }
   apiService.incrementPage();
-  var itemsHTML = cardTemplate(hits);
+  let itemsHTML = cardTemplate(hits);
 
   proxyElem.innerHTML = itemsHTML;
 
-  var items = proxyElem.querySelectorAll('li.cards');
+  let items = proxyElem.querySelectorAll('li.cards');
   infScroll.appendItems(items);
 });
 

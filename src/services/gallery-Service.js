@@ -57,7 +57,7 @@ export default class ImagesApiService {
   }
 
   set SearchQuery(string) {
-    return (this.searchQuery = string);
+    this.searchQuery = string;
   }
 
   get pageNum() {
@@ -94,28 +94,3 @@ export default class ImagesApiService {
 
 //   //   return images;
 //   // }
-
-//   resetPage() {
-//     this.page = 1;
-//   }
-
-//   getQueryPath() {
-//     return `${CORS}${BASE_URL}?key=${API_KEY}&image_type=photo&orientation=horizontal&q=${this.searchQuery}&page=${this.page}&per_page=12`;
-//   }
-
-//   get query() {
-//     return this.searchQuery;
-//   }
-
-//   set query(newQuery) {
-//     this.searchQuery = newQuery;
-//   }
-
-//   get pageNum() {
-//     return this.page;
-//   }
-
-//   set pageNum(newNum) {
-//     this.page = newNum;
-//   }
-// }

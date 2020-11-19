@@ -1,16 +1,10 @@
 import service from '../services/gallery-Service';
 import cardTemplate from '../templates/card.hbs';
 import * as basicLightbox from 'basiclightbox';
-
+import { refs } from './refs.js';
 // import * as InfiniteScroll from 'infinite-scroll';
 ////////-----------------ссылки на элементы--------------------------------------/////////
-// const refs = {
-//   $searchForm: document.querySelector('#search-form'),
-//   $galleryCont: document.querySelector('#galleryCont'),
-//   $loadMorebutton: document.querySelector('button[data-action="load-more"]'),
-//   $galleryList: document.querySelector('.gallery'),
-//   $ldsHeart: document.querySelector('.lds-heart'),
-// };
+
 ////////-----------------обработчики события --------------------------------------/////////
 // refs.$searchForm.addEventListener('submit', searchformSubmitHandler);
 // refs.$loadMorebutton.addEventListener('click', loadMorebuttonHandler);
@@ -68,26 +62,7 @@ function loadMorebuttonHandler() {
       toggleLoader();
     });
 }
-////////-----------------модкальное окно на клик--------------------------------------------/////////
-function openModalImg({ target }) {
-  if (target.nodeName !== 'IMG') {
-    return;
-  }
-  const largeImgURL = target.dataset.source;
 
-  const instance = basicLightbox.create(`
-  <img src="${largeImgURL}" width="800" height="600">
-`);
-  instance.show();
-  //createModal(largeImgURL);--------функция для отрисовки картинок отдельная (вызов )-------/////////
-}
-////////-----------------библиотека для модального окна--------------------------------------/////////
-// function createModal(img) {
-//   const instance = basicLightbox.create(`
-//   <img src="${img}" width="800" height="600">
-// `);
-//   instance.show();
-// }
 ////////-----------------отрисовка карточек галереи на странице -----------------------------/////////
 function updateGalleryList(items) {
   const markup = cardTemplate(items);
@@ -95,16 +70,13 @@ function updateGalleryList(items) {
 }
 ////////-----------------очистка галереи после поиска картинок------------------------------/////////
 
-const clearCountries = () => {
+export const clearCountries = () => {
   refs.$galleryCont.innerHTML = '';
 };
 ////////-----------------loader для галереи------------------------------/////////
-// const toggleLoader = () => {
-//   console.log('лоадер');
-//   refs.$ldsHeart.c;
-
-//   lassList.toggle('loaded');
-// };
+export const toggleLoader = () => {
+  refs.$ldsHeart.classList.toggle('loaded');
+};
 
 //////-----------------бесконечный скролл------------------------------/////////
 
