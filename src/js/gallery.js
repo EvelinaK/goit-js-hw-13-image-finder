@@ -1,6 +1,5 @@
 import service from '../services/gallery-Service';
 import cardTemplate from '../templates/card.hbs';
-import * as basicLightbox from 'basiclightbox';
 import { refs } from './refs.js';
 // import * as InfiniteScroll from 'infinite-scroll';
 ////////-----------------ссылки на элементы--------------------------------------/////////

@@ -1,5 +1,5 @@
 import * as basicLightbox from 'basiclightbox';
-import { refs } from './refs.js';
+
 ////////-----------------модкальное окно на клик--------------------------------------------/////////
 export function openModalImg({ target }) {
   if (target.nodeName !== 'IMG') {

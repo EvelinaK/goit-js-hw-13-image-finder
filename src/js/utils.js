@@ -3,7 +3,6 @@ import cardTemplate from '../templates/card.hbs';
 import { error, success } from '@pnotify/core';
 import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
-import * as basicLightbox from 'basiclightbox';
 import { refs } from './refs.js';
 import { clearCountries } from './gallery';
 import { toggleLoader } from './gallery';
